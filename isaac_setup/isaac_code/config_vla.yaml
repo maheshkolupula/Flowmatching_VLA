@@ -1,0 +1,253 @@
+execution:
+  mode: isaac
+  task_default: pick up the iphone
+  recovery_pose: HOME
+frame_mode:
+  dataset_dir: dataset/findandpick_new
+  episode: Find_and_Pick_001
+  frame: 0
+  post_release_frame: 306
+isaac_mode:
+  usd_path: scene/tomo_packing_suction.usd
+  headless: false
+  gui: true
+  physics: false
+  home_yaml: null
+  camera_prim: /tomo_re_uhand/Geometry/Body_base/Head_link1/Head_link2/Head_camera_link/robot_view_cam
+  robot_root: /tomo_re_uhand/Geometry
+  box_prim: /Iphone
+  phone_mesh_prim: /Iphone/geo/iPhone_14_Pro_Max
+  container_prim: /tomo_re_uhand/Box_1_v1___open
+  suction_prim: /tomo_re_uhand/Geometry/Body_base/Right_arm_link1/Right_arm_link2/Right_arm_link3/Right_arm_link4/Right_arm_link5/Right_arm_link6/Right_arm_endlink/Right_hand/RF_link_51/RF_link_52
+  cam_wh:
+  - 960
+  - 720
+  camera_intrinsics:
+    width: 960
+    height: 720
+    fx: 606.3965
+    fy: 606.3965
+    cx: 480.0
+    cy: 360.0
+  render_updates_per_frame: 3
+  warmup_ticks: 30
+  scene_fixes:
+    translate_world:
+      /tomo_re_uhand/Box_1_v1___open:
+      - -0.0636
+      - 0.0
+      - 0.0
+      /Env/geo/box_jig_v5:
+      - -0.0636
+      - 0.0
+      - 0.0
+      /Env/geo/Plane_009:
+      - 0.0
+      - 0.0
+      - -3.056
+    fit_bbox_xy:
+      /Env/geo/TM1001_00_610001_R00:
+        x:
+        - -0.125
+        - 0.765
+        y:
+        - -0.6
+        - 0.7
+      /Env/geo/label_pedestal:
+        x:
+        - 0.1
+        - 0.325
+        y:
+        - -0.475
+        - -0.25
+    hide:
+    - /Env/geo/Cube_003
+    - /Env/geo/Cube_004
+    - /Env/geo/Plane_007
+    materials:
+      /Env/geo/TM1001_00_610001_R00:
+        color:
+        - 0.74
+        - 0.74
+        - 0.75
+        metallic: 0.5
+        roughness: 0.35
+      /Env/geo/Plane_002:
+        color:
+        - 0.62
+        - 0.62
+        - 0.62
+        roughness: 0.6
+      /Env/geo/Plane_003:
+        color:
+        - 0.57
+        - 0.56
+        - 0.55
+        roughness: 0.9
+      /Env/geo/Plane:
+        color:
+        - 0.57
+        - 0.56
+        - 0.55
+        roughness: 0.9
+      /Env/geo/Plane_009:
+        color:
+        - 0.6
+        - 0.6
+        - 0.6
+        roughness: 0.9
+      /Env/geo/label_pedestal/label_pedestal:
+        color:
+        - 0.015
+        - 0.015
+        - 0.015
+        roughness: 0.5
+      /Env/geo/label_pedestal/Tape_Foam:
+        color:
+        - 0.6
+        - 0.4
+        - 0.14
+        roughness: 0.7
+    shader_inputs:
+      /tomo_re_uhand/Box_1_v1___open/Looks/Box1_v1/Box1_v1:
+        base_color_factor:
+        - 1.0
+        - 1.0
+        - 1.0
+    lighting:
+      dome_intensity: 1000
+      dome_color:
+      - 1.0
+      - 1.0
+      - 1.0
+    exposure:
+      auto: false
+      film_iso: 50
+  appearance:
+    bake_light_gain: 0.68
+    phone_texture_shader: /Iphone/geo/Looks/iPhone_14_pro_max/baseColorTex
+    phone_textures:
+      iPhone_14_plus: scene_overrides/phone_iPhone_14_plus_refined.png
+      iPhone_14_pro_max: scene_overrides/phone_iPhone_14_pro_max_refined.png
+    table_prim: /Env/geo/TM1001_00_610001_R00
+    table_materials:
+      Brushed metal:
+        color:
+        - 0.838
+        - 0.838
+        - 0.839
+        metallic: 0.5
+        roughness: 0.35
+      Dirty metal:
+        color:
+        - 0.176
+        - 0.187
+        - 0.213
+        metallic: 0.5
+        roughness: 0.5
+      Wood.002:
+        color:
+        - 0.074
+        - 0.044
+        - 0.04
+        roughness: 0.6
+      Oak Wood2:
+        color:
+        - 0.442
+        - 0.262
+        - 0.183
+        roughness: 0.6
+      Wood 124:
+        color:
+        - 0.509
+        - 0.198
+        - 0.118
+        roughness: 0.6
+      Wood:
+        color:
+        - 0.617
+        - 0.463
+        - 0.391
+        roughness: 0.6
+    textures:
+      /tomo_re_uhand/Box_1_v1___open/Looks/Box1_v1/baseColorTex: scene_overrides/box_refined_from_Find_and_Pick_001.png
+  dataset_start:
+    enabled: true
+    dataset_dir: dataset/findandpick_new
+    episode: Find_and_Pick_001
+    start_frame: 0
+    phone_yaw_offset_deg: 0.0
+    # phone_override: 
+    #   xy: [0.630, -0.505]
+    #   yaw_deg: 112.5
+
+      # xy: [0.455, -0.505]
+      # yaw_deg: 97.9     # X=0.45 (forward), Y=0.20 (Left side, away from right hand)
+suction:
+  mode: learned
+  attach_xy_tolerance_m: 0.06
+  attach_z_tolerance_m: 0.02
+  release_max_z_m: 0.1
+  release_inside_margin_m: 0.0
+  rest_z_in_box_m: 0.0524
+  learned_on_threshold: 0.6
+  learned_off_threshold: 0.05
+  learned_safety_gate: true
+  box_xy: [0.39, -0.01]          # Aiming for the exact center
+  box_release_radius_m: 0.03 # Strict 2cm radius to force a perfect drop
+
+visualization:
+  observer:
+    enabled: true
+    eye:
+    - 1.25
+    - -1.05
+    - 0.95
+    target:
+    - 0.38
+    - -0.18
+    - 0.08
+    hfov_deg: 55
+    wh:
+    - 960
+    - 720
+logging:
+  run_dir: /tmp/tomo_idp3_isaac_runs
+  save_frames_every: 1
+  save_depth_npy: false
+motion:
+  motion_map_path: model/1.0.0/motion_map.npz
+  grasp_offset_m:
+  - 0.00414
+  - 0.14384
+  - 0.1989
+  grasp_tolerance_m: 0.05
+  delta_clamp_rad: 0.15
+safety:
+  workspace_x_m:
+  - 0.2
+  - 0.9
+  workspace_y_m:
+  - -0.6
+  - 0.6
+  workspace_z_m:
+  - -0.1
+  - 0.5
+  early_abort_frame: 170
+checkpoints:
+  max_size: 64
+vla_policy:
+  adapter: ../act_adapter/tomo_vla_adapter.py
+  checkpoint: ../../model_2/best.pt
+  language_bank: ../../model/siglip_language_bank.pt
+  device: cuda:0
+  text_device: cpu
+  text_model: google/siglip-base-patch16-224
+  local_files_only: true
+  host: 127.0.0.1
+  port: 6081
+  authkey: tomo-vla
+  replan_every: 8
+  inference_seed: 12345
+  done_threshold: 0.6
+  default_instruction: pick up the phone and put it in the box

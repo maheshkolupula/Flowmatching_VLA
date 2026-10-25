@@ -1,0 +1,604 @@
+#usda 1.0
+(
+    customLayerData = {
+        dictionary cameraSettings = {
+            dictionary Front = {
+                double3 position = (500, 0, 0)
+                double radius = 5
+            }
+            dictionary Perspective = {
+                double3 position = (0.07163449891898901, 0.8368444260037069, 0.19459910511494885)
+                double3 target = (0.05202560625489447, -0.29607532050537855, 0.06467829678561904)
+            }
+            dictionary Right = {
+                double3 position = (0, -500, 0)
+                double radius = 5
+            }
+            dictionary Top = {
+                double3 position = (0, 0, 500)
+                double radius = 5
+            }
+            string boundCamera = "/OmniverseKit_Persp"
+        }
+        dictionary omni_layer = {
+            string authoring_layer = "./iphone.usda"
+        }
+        dictionary renderSettings = {
+        }
+    }
+    defaultPrim = "Root"
+    upAxis = "Z"
+)
+
+def Xform "Root"
+{
+    def Xform "iphone" (
+        apiSchemas = ["PhysicsRigidBodyAPI", "PhysxRigidBodyAPI"]
+        kind = "component"
+    )
+    {
+        bool physics:kinematicEnabled = 0
+        bool physics:rigidBodyEnabled = 1
+        float physxRigidBody:maxDepenetrationVelocity = 1
+        token ui:displayGroup = "Material Graphs"
+        token ui:displayName = "iphone"
+        int ui:order = 1024
+        float3 xformOp:rotateXYZ = (0, -0, 0)
+        float3 xformOp:scale = (1, 1, 1)
+        double3 xformOp:translate = (0, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+
+        def Scope "Looks"
+        {
+            def Material "Material_001"
+            {
+                token outputs:mdl:displacement.connect = </Root/iphone/Looks/Material_001/Material_001.outputs:out>
+                token outputs:mdl:surface.connect = </Root/iphone/Looks/Material_001/Material_001.outputs:out>
+                token outputs:mdl:volume.connect = </Root/iphone/Looks/Material_001/Material_001.outputs:out>
+
+                def Shader "Material_001"
+                {
+                    uniform token info:implementationSource = "sourceAsset"
+                    uniform asset info:mdl:sourceAsset = @2/pbr.mdl@
+                    uniform token info:mdl:sourceAsset:subIdentifier = "gltf_material"
+                    float inputs:alpha_cutoff = 0 (
+                        customData = {
+                            float default = 0.5
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Opacity"
+                        displayName = "Alpha Cutoff"
+                    )
+                    int inputs:alpha_mode = 0 (
+                        customData = {
+                            int default = 0
+                            dictionary range = {
+                                int max = 2
+                                int min = 0
+                            }
+                        }
+                        displayGroup = "Opacity"
+                        displayName = "Alpha Mode"
+                        renderType = "gltf_alpha_mode"
+                        sdrMetadata = {
+                            string __SDR__enum_value = "opaque"
+                            string options = "opaque:0|mask:1|blend:2"
+                        }
+                    )
+                    float inputs:base_alpha = 1 (
+                        customData = {
+                            float default = 1
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Base Alpha"
+                        displayName = "Alpha Mode"
+                    )
+                    color3f inputs:base_color_factor = (1, 1, 1) (
+                        customData = {
+                            float3 default = (1, 1, 1)
+                            dictionary range = {
+                                float3 max = (1, 1, 1)
+                                float3 min = (0, 0, 0)
+                            }
+                        }
+                        displayGroup = "PBR Metallic Roughness"
+                        displayName = "Base color"
+                    )
+                    token inputs:base_color_texture.connect = </Root/iphone/Looks/Material_001/baseColorTex.outputs:out>
+                    float inputs:emissive_strength = 10000 (
+                        customData = {
+                            float default = 1
+                        }
+                        displayGroup = "Emission"
+                        displayName = "Emission Intensity"
+                    )
+                    float inputs:metallic_factor = 0 (
+                        customData = {
+                            float default = 0
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Metallic Roughness"
+                        displayName = "Metallic Factor"
+                    )
+                    float inputs:roughness_factor = 0.5 (
+                        customData = {
+                            float default = 0
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Metallic Roughness"
+                        displayName = "Roughness Factor"
+                    )
+                    token outputs:out
+                }
+
+                def Shader "baseColorTex"
+                {
+                    uniform token info:implementationSource = "sourceAsset"
+                    uniform asset info:mdl:sourceAsset = @2/pbr.mdl@
+                    uniform token info:mdl:sourceAsset:subIdentifier = "gltf_texture_lookup"
+                    float2 inputs:offset = (0, 0) (
+                        customData = {
+                            float2 default = (0, 0)
+                        }
+                        displayGroup = "Texture Transform"
+                        displayName = "Offset"
+                    )
+                    float inputs:rotation = 0 (
+                        customData = {
+                            float default = 0
+                        }
+                        displayGroup = "Texture Transform"
+                        displayName = "Rotation"
+                    )
+                    float2 inputs:scale = (1, 1) (
+                        customData = {
+                            float2 default = (1, 1)
+                        }
+                        displayGroup = "Texture Transform"
+                        displayName = "Scale"
+                    )
+                    int inputs:tex_coord_index = 0 (
+                        customData = {
+                            int default = 0
+                        }
+                        displayGroup = "Source"
+                        displayName = "Coordinate Set"
+                    )
+                    asset inputs:texture = @5/iptexrend1.jpg@ (
+                        displayGroup = "Texture"
+                        displayName = "Texture File"
+                    )
+                    int inputs:wrap_s = 10497 (
+                        customData = {
+                            int default = 10497
+                        }
+                        displayGroup = "Sampler"
+                        displayName = "Wrap S"
+                        renderType = "gltf_wrapping_mode"
+                        sdrMetadata = {
+                            string __SDR__enum_value = "repeat"
+                            string options = "clamp_to_edge:33071|mirrored_repeat:33648|repeat:10497"
+                        }
+                    )
+                    int inputs:wrap_t = 10497 (
+                        customData = {
+                            int default = 10497
+                        }
+                        displayGroup = "Sampler"
+                        displayName = "Wrap T"
+                        renderType = "gltf_wrapping_mode"
+                        sdrMetadata = {
+                            string __SDR__enum_value = "repeat"
+                            string options = "clamp_to_edge:33071|mirrored_repeat:33648|repeat:10497"
+                        }
+                    )
+                    token outputs:out (
+                        renderType = "gltf_normal_texture_lookup_value"
+                    )
+                }
+            }
+
+            def Material "ip_2"
+            {
+                token outputs:mdl:displacement.connect = </Root/iphone/Looks/ip_2/ip_2.outputs:out>
+                token outputs:mdl:surface.connect = </Root/iphone/Looks/ip_2/ip_2.outputs:out>
+                token outputs:mdl:volume.connect = </Root/iphone/Looks/ip_2/ip_2.outputs:out>
+
+                def Shader "ip_2"
+                {
+                    uniform token info:implementationSource = "sourceAsset"
+                    uniform asset info:mdl:sourceAsset = @2/pbr.mdl@
+                    uniform token info:mdl:sourceAsset:subIdentifier = "gltf_material"
+                    float inputs:alpha_cutoff = 0 (
+                        customData = {
+                            float default = 0.5
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Opacity"
+                        displayName = "Alpha Cutoff"
+                    )
+                    int inputs:alpha_mode = 0 (
+                        customData = {
+                            int default = 0
+                            dictionary range = {
+                                int max = 2
+                                int min = 0
+                            }
+                        }
+                        displayGroup = "Opacity"
+                        displayName = "Alpha Mode"
+                        renderType = "gltf_alpha_mode"
+                        sdrMetadata = {
+                            string __SDR__enum_value = "opaque"
+                            string options = "opaque:0|mask:1|blend:2"
+                        }
+                    )
+                    float inputs:base_alpha = 1 (
+                        customData = {
+                            float default = 1
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Base Alpha"
+                        displayName = "Alpha Mode"
+                    )
+                    color3f inputs:base_color_factor = (1, 1, 1) (
+                        customData = {
+                            float3 default = (1, 1, 1)
+                            dictionary range = {
+                                float3 max = (1, 1, 1)
+                                float3 min = (0, 0, 0)
+                            }
+                        }
+                        displayGroup = "PBR Metallic Roughness"
+                        displayName = "Base color"
+                    )
+                    token inputs:base_color_texture.connect = </Root/iphone/Looks/ip_2/baseColorTex.outputs:out>
+                    float inputs:emissive_strength = 10000 (
+                        customData = {
+                            float default = 1
+                            dictionary omni = {
+                                dictionary kit = {
+                                    dictionary property = {
+                                        dictionary usd = {
+                                            float2 soft_range_ui = (0, 10000)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        displayGroup = "Emission"
+                        displayName = "Emission Intensity"
+                    )
+                    float inputs:metallic_factor = 0 (
+                        customData = {
+                            float default = 0
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Metallic Roughness"
+                        displayName = "Metallic Factor"
+                    )
+                    float inputs:roughness_factor = 0.5 (
+                        customData = {
+                            float default = 0
+                            dictionary range = {
+                                float max = 1
+                                float min = 0
+                            }
+                        }
+                        displayGroup = "Metallic Roughness"
+                        displayName = "Roughness Factor"
+                    )
+                    token outputs:out
+                }
+
+                def Shader "baseColorTex"
+                {
+                    uniform token info:implementationSource = "sourceAsset"
+                    uniform asset info:mdl:sourceAsset = @2/pbr.mdl@
+                    uniform token info:mdl:sourceAsset:subIdentifier = "gltf_texture_lookup"
+                    float2 inputs:offset = (0, 0) (
+                        customData = {
+                            float2 default = (0, 0)
+                        }
+                        displayGroup = "Texture Transform"
+                        displayName = "Offset"
+                    )
+                    float inputs:rotation = 0 (
+                        customData = {
+                            float default = 0
+                        }
+                        displayGroup = "Texture Transform"
+                        displayName = "Rotation"
+                    )
+                    float2 inputs:scale = (1, 1) (
+                        customData = {
+                            float2 default = (1, 1)
+                        }
+                        displayGroup = "Texture Transform"
+                        displayName = "Scale"
+                    )
+                    int inputs:tex_coord_index = 0 (
+                        customData = {
+                            int default = 0
+                        }
+                        displayGroup = "Source"
+                        displayName = "Coordinate Set"
+                    )
+                    asset inputs:texture = @5/2.png@ (
+                        displayGroup = "Texture"
+                        displayName = "Texture File"
+                    )
+                    int inputs:wrap_s = 10497 (
+                        customData = {
+                            int default = 10497
+                        }
+                        displayGroup = "Sampler"
+                        displayName = "Wrap S"
+                        renderType = "gltf_wrapping_mode"
+                        sdrMetadata = {
+                            string __SDR__enum_value = "repeat"
+                            string options = "clamp_to_edge:33071|mirrored_repeat:33648|repeat:10497"
+                        }
+                    )
+                    int inputs:wrap_t = 10497 (
+                        customData = {
+                            int default = 10497
+                        }
+                        displayGroup = "Sampler"
+                        displayName = "Wrap T"
+                        renderType = "gltf_wrapping_mode"
+                        sdrMetadata = {
+                            string __SDR__enum_value = "repeat"
+                            string options = "clamp_to_edge:33071|mirrored_repeat:33648|repeat:10497"
+                        }
+                    )
+                    token outputs:out (
+                        renderType = "gltf_normal_texture_lookup_value"
+                    )
+                }
+            }
+        }
+
+        def Mesh "Cube" (
+            apiSchemas = ["PhysicsCollisionAPI", "PhysxCollisionAPI", "PhysxConvexHullCollisionAPI", "PhysicsMeshCollisionAPI"]
+        )
+        {
+            float3[] extent = [(-0.09, -0.048000004, -0.0145000005), (0.09, 0.048000004, 0.0145000005)]
+            int[] faceVertexCounts = [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3]
+            int[] faceVertexIndices = [1, 3, 9, 1, 9, 6, 4, 7, 17, 4, 17, 14, 16, 19, 13, 16, 13, 11, 5, 15, 10, 5, 10, 0, 18, 8, 2, 18, 2, 12, 22, 23, 21, 22, 21, 20]
+            normal3f[] normals = [(-1, 0, 0), (-1, 0, 0), (-1, 0, 0), (-1, 0, 0), (-1, 0, 0), (-1, 0, 0), (0, 0, -1), (0, 0, -1), (0, 0, -1), (0, 0, -1), (0, 0, -1), (0, 0, -1), (1, 0, 0), (1, 0, 0), (1, 0, 0), (1, 0, 0), (1, 0, 0), (1, 0, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, -1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 1, 0), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1), (0, 0, 1)] (
+                interpolation = "faceVarying"
+            )
+            uniform token physics:approximation = "convexHull"
+            bool physics:collisionEnabled = 1
+            float physxCollision:contactOffset = -inf
+            float physxCollision:restOffset = -inf
+            float physxConvexHullCollision:minThickness = 0.1
+            point3f[] points = [(-0.09, -0.048000004, 0.0145000005), (-0.09, -0.048000004, 0.0145000005), (-0.09, 0.048000004, 0.0145000005), (-0.09, 0.048000004, 0.0145000005), (-0.09, -0.048000004, -0.0145000005), (-0.09, -0.048000004, -0.0145000005), (-0.09, -0.048000004, -0.0145000005), (-0.09, 0.048000004, -0.0145000005), (-0.09, 0.048000004, -0.0145000005), (-0.09, 0.048000004, -0.0145000005), (0.09, -0.048000004, 0.0145000005), (0.09, -0.048000004, 0.0145000005), (0.09, 0.048000004, 0.0145000005), (0.09, 0.048000004, 0.0145000005), (0.09, -0.048000004, -0.0145000005), (0.09, -0.048000004, -0.0145000005), (0.09, -0.048000004, -0.0145000005), (0.09, 0.048000004, -0.0145000005), (0.09, 0.048000004, -0.0145000005), (0.09, 0.048000004, -0.0145000005), (-0.09, -0.048000004, 0.0145000005), (-0.09, 0.048000004, 0.0145000005), (0.09, -0.048000004, 0.0145000005), (0.09, 0.048000004, 0.0145000005)]
+            texCoord2f[] primvars:st = [(0.15546562, 0.93159825), (0.29411364, 0.93159825), (0.29411364, 0.9557475), (0.15546562, 0.93159825), (0.29411364, 0.9557475), (0.15546562, 0.9557475), (0.6365301, 0.9339223), (0.47527105, 0.9339223), (0.47527105, 0.7301521), (0.6365301, 0.9339223), (0.47527105, 0.7301521), (0.6365301, 0.7301521), (0.1695933, 0.7141187), (0.2833053, 0.7141187), (0.2833053, 0.737601), (0.1695933, 0.7141187), (0.2833053, 0.737601), (0.1695933, 0.737601), (0.103224, 0.9094392), (0.103224, 0.75887406), (0.14574087, 0.75887406), (0.103224, 0.9094392), (0.14574087, 0.75887406), (0.14574087, 0.9094392), (0.34501627, 0.7609073), (0.34501627, 0.9066724), (0.303718, 0.9066724), (0.34501627, 0.7609073), (0.303718, 0.9066724), (0.303718, 0.7609073), (0.0026431084, 0.002455473), (0.99735695, 0.002455473), (0.99735695, 1.0003731), (0.0026431084, 0.002455473), (0.99735695, 1.0003731), (0.0026431084, 1.0003731)] (
+                interpolation = "faceVarying"
+            )
+            uniform token subdivisionScheme = "none"
+
+            def GeomSubset "Material_001" (
+                apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                uniform token elementType = "face"
+                uniform token familyName = "materialBind"
+                int[] indices = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                rel material:binding = </Root/iphone/Looks/Material_001>
+            }
+
+            def GeomSubset "ip_2" (
+                apiSchemas = ["MaterialBindingAPI"]
+            )
+            {
+                uniform token elementType = "face"
+                uniform token familyName = "materialBind"
+                int[] indices = [10, 11]
+                rel material:binding = </Root/iphone/Looks/ip_2>
+            }
+        }
+    }
+}
+
+def "Render" (
+    hide_in_stage_window = true
+    no_delete = true
+)
+{
+    def "OmniverseKit"
+    {
+        def "HydraTextures" (
+            hide_in_stage_window = true
+            no_delete = true
+        )
+        {
+            def RenderProduct "omni_kit_widget_viewport_ViewportTexture_0" (
+                prepend apiSchemas = ["OmniRtxSettingsCommonAdvancedAPI_1", "OmniRtxSettingsRtAdvancedAPI_1", "OmniRtxSettingsPtAdvancedAPI_1", "OmniRtxPostColorGradingAPI_1", "OmniRtxPostChromaticAberrationAPI_1", "OmniRtxPostBloomPhysicalAPI_1", "OmniRtxPostMatteObjectAPI_1", "OmniRtxPostCompositingAPI_1", "OmniRtxPostDofAPI_1", "OmniRtxPostMotionBlurAPI_1", "OmniRtxPostTvNoiseAPI_1", "OmniRtxPostTonemapIrayReinhardAPI_1", "OmniRtxPostDebugSettingsAPI_1", "OmniRtxDebugSettingsAPI_1"]
+                hide_in_stage_window = true
+                no_delete = true
+            )
+            {
+                rel camera = </OmniverseKit_Persp>
+                token omni:rtx:ambientOcclusion:denoiserMode = "none"
+                token omni:rtx:background:source:texture:textureMode = "repeatMirrored"
+                token omni:rtx:background:source:type = "domeLight"
+                bool omni:rtx:debug:view:pixelDebug:enableFixedTextPos = 1
+                token omni:rtx:directLighting:sampledLighting:denoisingTechnique = "None"
+                bool omni:rtx:dlss:frameGeneration = 0
+                float3 omni:rtx:domeLight:rotationAxis = (0, 0, 1)
+                bool omni:rtx:indirectDiffuse:denoiser:enabled = 0
+                bool omni:rtx:material:db:nonVisualMaterialCSV:enabled = 0
+                bool omni:rtx:material:db:syncLoads = 1
+                token omni:rtx:post:dlss:execMode = "performance"
+                bool omni:rtx:post:registeredCompositing:invertColorCorrection = 1
+                bool omni:rtx:post:registeredCompositing:invertToneMap = 1
+                bool omni:rtx:pt:adaptiveSampling:filterError = 0
+                uint omni:rtx:pt:adaptiveSampling:fixedSppIterations = 2
+                bool omni:rtx:pt:lightcache:cached:dontResolveConflicts = 1
+                int omni:rtx:pt:maxSamplesPerLaunch = 2073600
+                int omni:rtx:pt:mgpu:maxPixelsPerRegionExponent = 12
+                bool omni:rtx:reflections:denoiser:enabled = 0
+                token omni:rtx:rendermode = "RealTimePathTracing"
+                color3f omni:rtx:rt:ambientLight:color = (0.1, 0.1, 0.1)
+                bool omni:rtx:rt:demoire = 0
+                bool omni:rtx:rt:lightcache:spatialCache:dontResolveConflicts = 1
+                int omni:rtx:rt:sss:samples = 1
+                uint omni:rtx:rtpt:maxVolumeBounces = 15
+                float omni:rtx:rtpt:modulatingRoughnessThreshold = 0.08
+                bool omni:rtx:scene:hydra:materialSyncLoads = 1
+                bool omni:rtx:scene:hydra:mdlMaterialWarmup = 1
+                uint omni:rtx:viewTile:limit = 4294967295
+                rel orderedVars = </Render/Vars/LdrColor>
+                custom bool overrideClipRange = 0
+                uniform int2 resolution = (1280, 720)
+            }
+        }
+    }
+
+    def RenderSettings "OmniverseGlobalRenderSettings" (
+        prepend apiSchemas = ["OmniRtxSettingsGlobalRtAdvancedAPI_1", "OmniRtxSettingsGlobalPtAdvancedAPI_1"]
+        no_delete = true
+    )
+    {
+        rel products = </Render/OmniverseKit/HydraTextures/omni_kit_widget_viewport_ViewportTexture_0>
+    }
+
+    def "Vars"
+    {
+        def RenderVar "LdrColor" (
+            hide_in_stage_window = true
+            no_delete = true
+        )
+        {
+            uniform string sourceName = "LdrColor"
+        }
+    }
+}
+
+over "OmniverseKit_Persp" (
+    prepend apiSchemas = ["OmniRtxCameraAutoExposureAPI_1", "OmniRtxCameraExposureAPI_1"]
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (0.01, 10000000)
+    float exposure:fStop = 5
+    float exposure:responsivity = 1.1026709
+    float exposure:time = 0.02
+    float focalLength = 18.147562
+    float focusDistance = 400
+    custom uniform vector3d omni:kit:centerOfInterest = (8.249563354975034e-18, 0, -1.1405135146672607)
+    float3 xformOp:rotateXYZ = (83.45899, -6.3611094e-15, 179.0084)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0.07163449891898901, 0.8368444260037069, 0.19459910511494885)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+
+over "OmniverseKit_Front" (
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (1, 10000000)
+    float horizontalAperture = 50
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -500)
+    token projection = "orthographic"
+    float verticalAperture = 50
+    float3 xformOp:rotateXYZ = (90, -1.2722219e-14, 90)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (500, 0, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+
+over "OmniverseKit_Right" (
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (1, 10000000)
+    float horizontalAperture = 50
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -500)
+    token projection = "orthographic"
+    float verticalAperture = 50
+    float3 xformOp:rotateXYZ = (90, -1.41245e-30, 1.2722219e-14)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0, -500, 0)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+
+over "OmniverseKit_Top" (
+    customData = {
+        dictionary omni = {
+            dictionary kit = {
+                bool hide_in_stage_window = 1
+                bool no_delete = 1
+            }
+        }
+    }
+    hide_in_stage_window = true
+    kind = "component"
+    no_delete = true
+)
+{
+    float2 clippingRange = (1, 10000000)
+    float horizontalAperture = 50
+    custom uniform vector3d omni:kit:centerOfInterest = (0, 0, -500)
+    token projection = "orthographic"
+    float verticalAperture = 50
+    float3 xformOp:rotateXYZ = (-1.2722219e-14, -7.016709e-15, -90)
+    float3 xformOp:scale = (1, 1, 1)
+    double3 xformOp:translate = (0, 0, 500)
+    uniform token[] xformOpOrder = ["xformOp:translate", "xformOp:rotateXYZ", "xformOp:scale"]
+}
+

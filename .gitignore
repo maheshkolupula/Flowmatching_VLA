@@ -1,0 +1,16 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large training dataset (7 GB)
+data/
+
+# Large model checkpoints (>100MB GitHub limit)
+model_2/*.pt
+*.pt
+!model/siglip_language_bank.pt
+
+# Temporary logs and runs
+/tmp/
+*.log

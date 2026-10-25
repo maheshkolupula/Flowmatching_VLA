@@ -1,0 +1,51 @@
+{
+  "target": "phone",
+  "episode": "Find_and_Pick_001",
+  "phone_material": "iPhone_14_plus",
+  "frames": [
+    30,
+    34,
+    38,
+    42,
+    46,
+    50,
+    54,
+    58,
+    62,
+    66,
+    70,
+    74,
+    78,
+    82,
+    86,
+    90,
+    94,
+    98,
+    102,
+    106,
+    110,
+    114,
+    118,
+    122,
+    126,
+    130,
+    134,
+    138,
+    142
+  ],
+  "triangles": 12,
+  "triangles_observed": 4,
+  "texels_baked": 2234423,
+  "atlas": [
+    2486,
+    2085
+  ],
+  "light_gain": 0.68,
+  "source_texture": "/home/emagesoft/Desktop/idp3colourrgbtraining/deployment/isaac/xyzrgb_idp3_isaac/scene/5/iphone_14_pro_max_texture_0.2x.png",
+  "output": "/home/emagesoft/Desktop/idp3colourrgbtraining/deployment/isaac/xyzrgb_idp3_isaac/scene_overrides/phone_iPhone_14_plus_from_Find_and_Pick_001.png",
+  "baked_mean_srgb": [
+    181.10000610351562,
+    185.1999969482422,
+    187.0
+  ]
+}

@@ -1,0 +1,9 @@
+# start the vla server (terminal-1)
+cd /home/emagesoft/Downloads/flow_matching_vla/isaac_setup/isaac_code
+python3 vla_policy_server.py --config config_vla.yaml
+
+
+
+# Start the Isaac Sim Environment  (terminal-2)
+cd /home/emagesoft/Downloads/flow_matching_vla/isaac_setup/isaac_code
+/home/emagesoft/Downloads/isaac_sim_files/isaac-sim-standalone-6.0.1-linux-x86_64/python.sh isaac_vla_runner.py --config config_vla.yaml
